@@ -7,7 +7,8 @@
       "Bash(dotnet build:*)",
       "Bash(dotnet nuget:*)",
       "WebSearch",
-      "Bash(dotnet pack:*)"
+      "Bash(dotnet pack:*)",
+      "Bash(dir C:ProjectsGitHubintl-tel-input-blazor*.md)"
     ]
   }
 }
