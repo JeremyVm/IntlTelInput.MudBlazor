@@ -446,3 +446,6 @@ $RECYCLE.BIN/
 !.vscode/tasks.json
 !.vscode/launch.json
 !.vscode/extensions.json
+
+# npm (intl-tel-input dependency in RCL)
+src/IntlTelInputBlazor/package-lock.json

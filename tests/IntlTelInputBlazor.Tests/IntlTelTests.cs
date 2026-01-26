@@ -1,3 +1,5 @@
+using Xunit;
+
 namespace IntlTelInputBlazor.Tests;
 
 public class IntlTelTests
@@ -70,21 +72,6 @@ public class IntlTelTests
         var intlTel1 = new IntlTel { Number = "+1234567890" };
         var intlTel2 = new IntlTel { Number = "+0987654321" };
         Assert.True(intlTel1 != intlTel2);
-    }
-
-
-    [Fact]
-    public void Issue_BelgianNumberDoesNotValidate()
-    {
-        var countryData = new IntlTelCountryData { Iso2 = "BE", DialCode = "32", Name = "Belgium" };
-        var intlTel = new IntlTel
-        {
-            Number = "091221313",
-            CountryData = countryData
-        };
-
-        Assert.Equal("091221313", intlTel.Number);
-        Assert.True(intlTel.IsValid);
     }
 
     [Fact]

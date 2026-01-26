@@ -47,4 +47,10 @@ Includes a MudBlazor component as well.
       </None>
     </ItemGroup>
 
+    <!-- npm build target to copy intl-tel-input assets -->
+    <Target Name="NpmBuild" BeforeTargets="BeforeBuild" Condition="!Exists('wwwroot\js\intlTelInput.js')">
+        <Exec Command="npm install" WorkingDirectory="$(MSBuildProjectDirectory)" />
+        <Exec Command="npm run build" WorkingDirectory="$(MSBuildProjectDirectory)" />
+    </Target>
+
 </Project>

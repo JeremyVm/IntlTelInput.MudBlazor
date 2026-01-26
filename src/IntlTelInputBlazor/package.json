@@ -1,0 +1,11 @@
+{
+  "name": "intl-tel-input-blazor",
+  "version": "2.0.0",
+  "private": true,
+  "devDependencies": {
+    "intl-tel-input": "^25.3.0"
+  },
+  "scripts": {
+    "build": "node build-assets.js"
+  }
+}

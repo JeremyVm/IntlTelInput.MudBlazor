@@ -3,7 +3,8 @@
     "allow": [
       "Bash(tree:*)",
       "WebFetch(domain:github.com)",
-      "Bash(dotnet test:*)"
+      "Bash(dotnet test:*)",
+      "Bash(dotnet build:*)"
     ]
   }
 }
