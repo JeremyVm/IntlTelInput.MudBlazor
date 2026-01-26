@@ -1,6 +1,7 @@
 @inherits InputBase<IntlTel>
 @implements IAsyncDisposable
 @inject IntlTelInputJsInterop _intlTelInputJsInterop
+@using System.Globalization
 
 <input @onchange="OnInput" type="tel" @ref="_telInput"/>
 
@@ -39,7 +40,7 @@
     public string PlaceholderNumberType { get; set; } = "MOBILE";
 
     [Parameter]
-    public IEnumerable<string> PreferredCountries { get; set; } = new[] {"us", "gb"};
+    public IEnumerable<string> PreferredCountries { get; set; } = new[] { RegionInfo.CurrentRegion.TwoLetterISORegionName };
 
     [Parameter]
     public bool SeparateDialCode { get; set; }

@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Components.Web;
 using Microsoft.JSInterop;
 using MudBlazor;
 using MudBlazor.Utilities;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
@@ -22,18 +23,11 @@ public partial class MudIntlTelInput<T> : MudDebouncedInput<T>
 
     public MudIntlTelInput() : base()
     {
-        //Validation = new Func<T, bool>(ValidateInput);
-
         Converter = new()
         {
-            SetFunc = value => value as string,
-            GetFunc = text => (T)(object)(IntlTel)text,
+            SetFunc = value => (value as IntlTel)?.Number,
+            GetFunc = text => (T)(object)new IntlTel { Number = text ?? string.Empty },
         };
-    }
-
-    protected bool ValidateInput(T value)
-    {
-        return typeof(T) == typeof(IntlTel) && ((IntlTel)(object)value)?.IsValid != false;
     }
 
     /// <summary>
@@ -166,9 +160,13 @@ public partial class MudIntlTelInput<T> : MudDebouncedInput<T>
     {
         if (firstRender)
         {
+            if (typeof(T) != typeof(IntlTel))
+            {
+                throw new InvalidOperationException($"MudIntlTelInput only supports IntlTel type parameter. Got: {typeof(T).Name}");
+            }
             _dotNetHelper = DotNetObjectReference.Create(this) as DotNetObjectReference<MudIntlTelInput<IntlTel>>;
 
-            _inputIndex = await _intlTelInputJsInterop.Init2(InputReference.ElementReference, _dotNetHelper, new
+            _inputIndex = await _intlTelInputJsInterop.Init(InputReference.ElementReference, _dotNetHelper, new
             {
                 AllowDropDown,
                 AutoHideDialCode,

@@ -16,13 +16,8 @@ public class IntlTelInputJsInterop : IAsyncDisposable
             "import", "./_content/IntlTelInputBlazor/js/intlTelInputInterop.js").AsTask());
     }
 
-    public async ValueTask<int> Init(ElementReference reference, DotNetObjectReference<IntlTelInput> dotNetHelper, object options)
-    {
-        _module = await _moduleTask.Value;
-        return await _module.InvokeAsync<int>("init", reference, dotNetHelper, options);
-    }
-
-    public async ValueTask<int> Init2(ElementReference reference, DotNetObjectReference<MudIntlTelInput<IntlTel>> dotNetHelper, object options)
+    public async ValueTask<int> Init<T>(ElementReference reference, DotNetObjectReference<T> dotNetHelper, object options)
+        where T : class
     {
         _module = await _moduleTask.Value;
         return await _module.InvokeAsync<int>("init", reference, dotNetHelper, options);
