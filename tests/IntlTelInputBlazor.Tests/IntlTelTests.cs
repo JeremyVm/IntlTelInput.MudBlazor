@@ -109,4 +109,27 @@ public class IntlTelTests
         var intlTel = new IntlTel { Number = "+1234567890" };
         Assert.Equal("+1234567890", intlTel.ToString());
     }
+
+    [Fact]
+    public void BelgianFixedLineNumber_IsValid()
+    {
+        // Belgian fixed line number: 09 122 13 13 (Ghent area code)
+        // E.164 format: +3291221313
+        var countryData = new IntlTelCountryData { Iso2 = "be", DialCode = "32", Name = "Belgium" };
+        var intlTel = new IntlTel
+        {
+            Number = "+3291221313",
+            IsValid = true,
+            ValidationError = 0,
+            CountryData = countryData,
+            NumberType = 0 // FIXED_LINE
+        };
+
+        Assert.Equal("+3291221313", intlTel.Number);
+        Assert.True(intlTel.IsValid);
+        Assert.Equal(0, intlTel.ValidationError);
+        Assert.Equal("be", intlTel.CountryData.Iso2);
+        Assert.Equal("32", intlTel.CountryData.DialCode);
+        Assert.Equal(0, intlTel.NumberType);
+    }
 }
