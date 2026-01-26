@@ -6,7 +6,8 @@
       "Bash(dotnet test:*)",
       "Bash(dotnet build:*)",
       "Bash(dotnet nuget:*)",
-      "WebSearch"
+      "WebSearch",
+      "Bash(dotnet pack:*)"
     ]
   }
 }
