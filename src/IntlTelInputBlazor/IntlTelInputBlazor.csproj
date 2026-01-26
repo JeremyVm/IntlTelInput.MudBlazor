@@ -2,8 +2,8 @@
 
     <PropertyGroup>
         <TargetFrameworks>net8.0;net9.0;net10.0</TargetFrameworks>
-        <AssemblyVersion>3.0.1</AssemblyVersion>
-        <FileVersion>3.0.1</FileVersion>
+        <AssemblyVersion>3.0.22</AssemblyVersion>
+        <FileVersion>3.0.22</FileVersion>
         <Authors>Rolandas, Giovanni Quarella, JeremyVm</Authors>
 		<PackageId>IntlTelInput.MudBlazor</PackageId>
         <PackageTags>Blazor;intl-tel-input;MudBlazor</PackageTags>
@@ -11,7 +11,7 @@
 	        International Telephone Input js library wrapper for Blazor serverside and clientside!
 	        Includes a MudBlazor component as well.
         </Description>
-        <Version>3.0.1</Version>
+        <Version>3.0.22</Version>
         <PackageLicenseExpression>MIT</PackageLicenseExpression>
         <RepositoryUrl>https://github.com/JeremyVm/intl-tel-input-blazor</RepositoryUrl>
 		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
@@ -23,7 +23,7 @@
         <PackageProjectUrl>https://github.com/JeremyVm/intl-tel-input-blazor</PackageProjectUrl>
         <PackageReadmeFile>readme.md</PackageReadmeFile>
         <PackageReleaseNotes>
-	        v3.0.1: Fixed JS interop property casing, utils.js path resolution, validation when utils not loaded, and InitialCountry="auto" geoIpLookup. Added support for all phone number types (fixed-line, mobile).
+	        v3.0.22: Fixed issue with OnTextAsync causing premature JS interop calls in MudIntlTelInput which resulted in not responding applications.
 	        See full changelog: https://github.com/JeremyVm/intl-tel-input-blazor/blob/main/CHANGELOG.md
         </PackageReleaseNotes>
         <RepositoryType>git</RepositoryType>
