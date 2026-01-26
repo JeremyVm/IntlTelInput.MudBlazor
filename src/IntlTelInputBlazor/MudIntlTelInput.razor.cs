@@ -150,7 +150,7 @@ public partial class MudIntlTelInput<T> : MudDebouncedInput<T>, IDisposable
     public bool SeparateDialCode { get; set; }
 
     [Parameter]
-    public string UtilsScript { get; set; } = "./_content/IntlTelInputBlazor/js/utils.js";
+    public string UtilsScript { get; set; } = "/_content/IntlTelInputBlazor/js/utils.js";
 
     private int _inputIndex;
 

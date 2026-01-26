@@ -2,25 +2,53 @@
 
 <PageTitle>Home</PageTitle>
 
-<h1>Hello, phone!</h1>
+<MudText Typo="Typo.h4" Class="mb-4">Phone Number Entry</MudText>
 
 <EditForm EditContext="_editContext" OnValidSubmit="OnValidSubmit">
     <DataAnnotationsValidator/>
     <ValidationSummary/>
 
-    <MudIntlTelInput @bind-Value="_model.IntTelNumber" Label=@($"Tel. 1: ({_model.Number})") For="@(() => _model.IntTelNumber)" />
+    <MudGrid>
+        <MudItem xs="12" sm="3" Class="d-flex align-center">
+            <MudText>Primary Phone</MudText>
+        </MudItem>
+        <MudItem xs="12" sm="9">
+            <MudIntlTelInput @bind-Value="_model.IntTelNumber"
+                             Placeholder="Enter your phone number"
+                             InitialCountry="auto"
+                             For="@(() => _model.IntTelNumber)" />
+        </MudItem>
 
-    <MudIntlTelInput @bind-Value="_model.IntTelNumber2" Label=@($"Tel. 2: ({_model.Number2})") For="@(() => _model.IntTelNumber2)" />
-    <br />
+        <MudItem xs="12" sm="3" Class="d-flex align-center">
+            <MudText>Secondary Phone</MudText>
+        </MudItem>
+        <MudItem xs="12" sm="9">
+            <MudIntlTelInput @bind-Value="_model.IntTelNumber2"
+                             Placeholder="Enter your phone number"
+                             InitialCountry="auto"
+                             For="@(() => _model.IntTelNumber2)" />
+        </MudItem>
 
-    <MudButton Variant="Variant.Filled" Color="Color.Primary" Class="ml-auto">Save</MudButton>
-    
+        <MudItem xs="12" Class="d-flex justify-end mt-4">
+            <MudButton Variant="Variant.Filled" Color="Color.Primary" ButtonType="ButtonType.Submit">Save</MudButton>
+        </MudItem>
+
+        @if (_submitted)
+        {
+            <MudItem xs="12">
+                <MudAlert Severity="Severity.Success" Class="mt-4">
+                    Saved! Number 1: @_model.IntTelNumber?.Number | Number 2: @_model.IntTelNumber2?.Number
+                </MudAlert>
+            </MudItem>
+        }
+    </MudGrid>
 </EditForm>
 
 @code
 {
     NumberModel _model = new NumberModel();
     EditContext _editContext;
+    bool _submitted;
 
     protected override void OnInitialized()
     {
@@ -29,8 +57,7 @@
 
     private void OnValidSubmit()
     {
-        var tel1 = _model.IntTelNumber.Number;
-        var tel2 = _model.IntTelNumber2.Number;
-        Console.WriteLine($"Number 1: {tel1}; Number 2: {tel2}");
+        _submitted = true;
+        Console.WriteLine($"Number 1: {_model.IntTelNumber?.Number}; Number 2: {_model.IntTelNumber2?.Number}");
     }
 }

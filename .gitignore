@@ -449,3 +449,7 @@ $RECYCLE.BIN/
 
 # npm (intl-tel-input dependency in RCL)
 src/IntlTelInputBlazor/package-lock.json
+
+# AI files
+.claude/
+claude/
