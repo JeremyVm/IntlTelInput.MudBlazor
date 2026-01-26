@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace IntlTelInputBlazor;
 
-public partial class MudIntlTelInput<T> : MudDebouncedInput<T>
+public partial class MudIntlTelInput<T> : MudDebouncedInput<T>, IDisposable
 {
     protected string Classname =>
        new CssBuilder("mud-input-input-control")
@@ -209,14 +209,12 @@ public partial class MudIntlTelInput<T> : MudDebouncedInput<T>
         await Update();
     }
 
-    protected override void Dispose(bool disposing)
+    public void Dispose()
     {
         if (_inputIndex >= 0)
         {
             _ = _intlTelInputJsInterop.Destroy(_inputIndex);
         }
         _dotNetHelper?.Dispose();
-
-        base.Dispose(disposing);
     }
 }
