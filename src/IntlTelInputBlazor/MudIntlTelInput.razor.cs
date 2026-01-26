@@ -108,9 +108,12 @@ public partial class MudIntlTelInput<T> : MudDebouncedInput<T>
         return;
     }
 
-    protected override Task SetTextAsync(string text, bool updateValue = true)
+    protected override async Task SetTextAsync(string text, bool updateValue = true)
     {
-        return Task.CompletedTask;
+        if (_inputIndex >= 0 && text != null)
+        {
+            await _intlTelInputJsInterop.SetNumber(_inputIndex, text);
+        }
     }
 
     [Parameter]
@@ -210,6 +213,10 @@ public partial class MudIntlTelInput<T> : MudDebouncedInput<T>
 
     protected override void Dispose(bool disposing)
     {
+        if (_inputIndex >= 0)
+        {
+            _ = _intlTelInputJsInterop.Destroy(_inputIndex);
+        }
         _dotNetHelper?.Dispose();
 
         base.Dispose(disposing);

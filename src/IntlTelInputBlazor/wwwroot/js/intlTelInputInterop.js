@@ -24,3 +24,10 @@ export function setNumber(id, number) {
     const input = inputs[id];
     input.setNumber(number);
 }
+
+export function destroy(index) {
+    if (inputs[index]) {
+        inputs[index].destroy();
+        inputs[index] = null;
+    }
+}

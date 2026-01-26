@@ -1,4 +1,5 @@
 @inherits InputBase<IntlTel>
+@implements IAsyncDisposable
 @inject IntlTelInputJsInterop _intlTelInputJsInterop
 
 <input @onchange="OnInput" type="tel" @ref="_telInput"/>
@@ -85,7 +86,11 @@
 
     protected override bool TryParseValueFromString(string value, out IntlTel result, out string validationErrorMessage)
     {
-        throw new NotImplementedException();
+        result = string.IsNullOrWhiteSpace(value)
+            ? new IntlTel { Number = string.Empty }
+            : new IntlTel { Number = value };
+        validationErrorMessage = null;
+        return true;
     }
 
     [JSInvokable]
@@ -98,13 +103,17 @@
         }
     }
 
-    private async void OnInput(ChangeEventArgs e)
+    private async Task OnInput(ChangeEventArgs e)
     {
         await Update();
     }
 
-    protected override void Dispose(bool disposing)
+    public async ValueTask DisposeAsync()
     {
+        if (_inputIndex >= 0)
+        {
+            await _intlTelInputJsInterop.Destroy(_inputIndex);
+        }
         dotNetHelper?.Dispose();
     }
 }

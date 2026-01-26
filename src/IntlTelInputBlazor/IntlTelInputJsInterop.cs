@@ -38,6 +38,15 @@ public class IntlTelInputJsInterop : IAsyncDisposable
         await _module.InvokeVoidAsync("setNumber", id, number);
     }
 
+    public async ValueTask Destroy(int inputIndex)
+    {
+        if (_moduleTask.IsValueCreated)
+        {
+            var module = await _moduleTask.Value;
+            await module.InvokeVoidAsync("destroy", inputIndex);
+        }
+    }
+
     public async ValueTask DisposeAsync()
     {
         if (_moduleTask.IsValueCreated)
