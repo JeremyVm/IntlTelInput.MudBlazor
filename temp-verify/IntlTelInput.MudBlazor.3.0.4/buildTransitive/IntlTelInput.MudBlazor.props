@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\buildMultiTargeting\IntlTelInput.MudBlazor.props" />
+</Project>
