@@ -2,8 +2,8 @@
 
     <PropertyGroup>
         <TargetFrameworks>net8.0;net9.0;net10.0</TargetFrameworks>
-        <AssemblyVersion>3.0.3</AssemblyVersion>
-        <FileVersion>3.0.3</FileVersion>
+        <AssemblyVersion>3.0.4</AssemblyVersion>
+        <FileVersion>3.0.4</FileVersion>
         <Authors>Rolandas, Giovanni Quarella, JeremyVm</Authors>
 		<PackageId>IntlTelInput.MudBlazor</PackageId>
         <PackageTags>Blazor;intl-tel-input;MudBlazor</PackageTags>
@@ -11,7 +11,7 @@
 	        International Telephone Input js library wrapper for Blazor serverside and clientside!
 	        Includes a MudBlazor component as well.
         </Description>
-        <Version>3.0.3</Version>
+        <Version>3.0.4</Version>
         <PackageLicenseExpression>MIT</PackageLicenseExpression>
         <RepositoryUrl>https://github.com/JeremyVm/intl-tel-input-blazor</RepositoryUrl>
 		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
@@ -23,7 +23,7 @@
         <PackageProjectUrl>https://github.com/JeremyVm/intl-tel-input-blazor</PackageProjectUrl>
         <PackageReadmeFile>readme.md</PackageReadmeFile>
         <PackageReleaseNotes>
-			v3.0.3: Fix wrong reference to load JS Interop file.
+			v3.0.4: Fix reference to Utils script.
 			See full changelog: https://github.com/JeremyVm/intl-tel-input-blazor/blob/main/CHANGELOG.md
 		</PackageReleaseNotes>
         <RepositoryType>git</RepositoryType>
