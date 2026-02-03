@@ -8,7 +8,9 @@
       "Bash(dotnet nuget:*)",
       "WebSearch",
       "Bash(dotnet pack:*)",
-      "Bash(dir C:ProjectsGitHubintl-tel-input-blazor*.md)"
+      "Bash(dir C:ProjectsGitHubintl-tel-input-blazor*.md)",
+      "Bash(ls:*)",
+      "Bash(cat:*)"
     ]
   }
 }
