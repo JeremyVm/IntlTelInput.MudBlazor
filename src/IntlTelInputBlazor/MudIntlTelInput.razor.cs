@@ -138,7 +138,10 @@ public partial class MudIntlTelInput<T> : MudDebouncedInput<T>, IDisposable
     {
         var value = (T)(object)await _intlTelInputJsInterop.GetData(_inputIndex);
 
-        if (value is not null) await _intlTelInputJsInterop.SetNumber(_inputIndex, value.ToString());
+        if (value is not null)
+        {
+            await _intlTelInputJsInterop.SetNumber(_inputIndex, value.ToString());
+        }
 
         await base.SetValueAsync(value);
     }
@@ -183,6 +186,7 @@ public partial class MudIntlTelInput<T> : MudDebouncedInput<T>, IDisposable
 
     protected override Task SetTextAsync(string text, bool updateValue = true)
     {
+        Text = text;
         return Task.CompletedTask;
     }
 
