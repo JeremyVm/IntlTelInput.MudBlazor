@@ -1,15 +1,29 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Components;
+﻿using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.JSInterop;
 using MudBlazor;
 using MudBlazor.Utilities;
+using System;
+using System.Collections.Generic;
+using System.Globalization;
+using System.Linq;
+using System.Threading.Tasks;
+using static MudBlazor.Colors;
 
 namespace IntlTelInputBlazor;
+
+public class Converter<T> : IReversibleConverter<T, string>
+{
+    public string Convert(T input)
+    {
+        return (input as IntlTel)?.Number;
+    }
+
+    public T ConvertBack(string input)
+    {
+        return (T)(object)new IntlTel { Number = input ?? string.Empty };
+    }
+}
 
 public partial class MudIntlTelInput<T> : MudDebouncedInput<T>, IDisposable
 {
@@ -19,11 +33,7 @@ public partial class MudIntlTelInput<T> : MudDebouncedInput<T>, IDisposable
 
     public MudIntlTelInput()
     {
-        Converter = new MudBlazor.Converter<T, string>
-        {
-            SetFunc = value => (value as IntlTel)?.Number,
-            GetFunc = text => (T)(object)new IntlTel { Number = text ?? string.Empty }
-        };
+        Converter = new Converter<T>();
     }
 
     [Parameter] public bool AllowDropDown { get; set; } = true;
@@ -134,7 +144,7 @@ public partial class MudIntlTelInput<T> : MudDebouncedInput<T>, IDisposable
     }
 
     [JSInvokable]
-    public async Task Update()
+    public async Task Update(string input)
     {
         var value = (T)(object)await _intlTelInputJsInterop.GetData(_inputIndex);
 
@@ -143,7 +153,7 @@ public partial class MudIntlTelInput<T> : MudDebouncedInput<T>, IDisposable
             await _intlTelInputJsInterop.SetNumber(_inputIndex, value.ToString());
         }
 
-        await base.SetValueAsync(value);
+        await base.SetValueAndUpdateTextAsync(value);
     }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
@@ -184,7 +194,7 @@ public partial class MudIntlTelInput<T> : MudDebouncedInput<T>, IDisposable
         await base.ResetValueAsync();
     }
 
-    protected override Task SetTextAsync(string text, bool updateValue = true)
+    protected override Task SetTextAndUpdateValueAsync(string text, bool updateValue = true)
     {
         Text = text;
         return Task.CompletedTask;
@@ -197,8 +207,8 @@ public partial class MudIntlTelInput<T> : MudDebouncedInput<T>, IDisposable
             (string.IsNullOrEmpty(Text) ? "0" : $"{Text.Length}") + $" / {Counter}";
     }
 
-    private async Task OnInput(ChangeEventArgs e)
+    private async Task OnInput(string? input)
     {
-        await Update();
+        await Update(input);
     }
 }
